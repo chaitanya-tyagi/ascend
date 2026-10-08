@@ -1,0 +1,331 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-display: var(--font-michroma), var(--font-geist-sans), sans-serif;
+
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+
+  --color-obsidian: var(--obsidian);
+  --color-graphite: var(--graphite);
+  --color-gunmetal: var(--gunmetal);
+  --color-steel: var(--steel);
+  --color-crimson: var(--crimson);
+  --color-crimson-dim: var(--crimson-dim);
+  --color-void: var(--void);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+:root {
+  color-scheme: dark;
+  --obsidian: #050608;
+  --graphite: #0d0f13;
+  --gunmetal: #1a1d23;
+  --steel: #3a3f48;
+  --crimson: #e3173a;
+  --crimson-dim: #7a0f22;
+  --void: #1c1030;
+
+  --background: var(--obsidian);
+  --foreground: #e7e8eb;
+  --card: #0b0d10;
+  --card-foreground: #e7e8eb;
+  --popover: #0b0d10;
+  --popover-foreground: #e7e8eb;
+  --primary: var(--crimson);
+  --primary-foreground: #fff;
+  --secondary: var(--gunmetal);
+  --secondary-foreground: #e7e8eb;
+  --muted: #121418;
+  --muted-foreground: #8a8f99;
+  --accent: var(--gunmetal);
+  --accent-foreground: #e7e8eb;
+  --destructive: var(--crimson);
+  --border: #23262d;
+  --input: #23262d;
+  --ring: var(--crimson);
+  --radius: 0.125rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html,
+  body {
+    @apply bg-background text-foreground;
+    overflow-x: hidden;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--crimson) 45%, transparent);
+    color: #fff;
+  }
+}
+
+/* ---------- ASCEND motion primitives ---------- */
+
+@keyframes draw-line {
+  from {
+    stroke-dashoffset: var(--len, 1000);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes energy-flow {
+  to {
+    stroke-dashoffset: -200;
+  }
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes flicker-in {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  20% {
+    opacity: 0.1;
+  }
+  35% {
+    opacity: 0.9;
+  }
+  45% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+@keyframes floor-scroll {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 80px;
+  }
+}
+
+@keyframes leg-swing {
+  0%,
+  100% {
+    transform: rotate(14deg);
+  }
+  50% {
+    transform: rotate(-14deg);
+  }
+}
+
+@keyframes idle-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-1.5px);
+  }
+}
+
+@keyframes camera-push {
+  from {
+    transform: scale(1.18) translateY(3%);
+    filter: blur(6px);
+  }
+  to {
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes road-line {
+  from {
+    transform: translateX(-50%) scaleY(0);
+  }
+  to {
+    transform: translateX(-50%) scaleY(1);
+  }
+}
+
+@keyframes road-widen {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes bar-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.draw-line {
+  stroke-dasharray: var(--len, 1000);
+  stroke-dashoffset: var(--len, 1000);
+  animation: draw-line var(--dur, 1.6s) cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  animation-delay: var(--delay, 0s);
+}
+
+.energy-flow {
+  stroke-dasharray: 6 194;
+  animation: energy-flow 3.2s linear infinite;
+}
+
+.flicker-in {
+  opacity: 0;
+  animation: flicker-in 0.9s ease-out forwards;
+  animation-delay: var(--delay, 0s);
+}
+
+.rise-in {
+  opacity: 0;
+  animation: rise-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--delay, 0s);
+}
+
+.fade-in-slow {
+  opacity: 0;
+  animation: fade-in var(--dur, 2.4s) ease-out forwards;
+  animation-delay: var(--delay, 0s);
+}
+
+.caret::after {
+  content: '_';
+  margin-left: 2px;
+  animation: caret 1s steps(1) infinite;
+}
+
+.text-glow {
+  text-shadow:
+    0 0 18px color-mix(in oklab, var(--crimson) 55%, transparent),
+    0 0 2px color-mix(in oklab, var(--crimson) 80%, transparent);
+}
+
+.clip-corner {
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+}
+
+.clip-corner-sm {
+  clip-path: polygon(0 0, calc(100% - 7px) 0, 100% 7px, 100% 100%, 7px 100%, 0 calc(100% - 7px));
+}
+
+.scanlines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.018) 0px,
+    rgba(255, 255, 255, 0.018) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .draw-line {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .energy-flow,
+  .motion-safe-only {
+    animation: none !important;
+    display: none;
+  }
+  .flicker-in,
+  .rise-in,
+  .fade-in-slow {
+    animation: none;
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
